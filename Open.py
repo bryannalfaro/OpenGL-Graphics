@@ -6,11 +6,11 @@ from utilities.shaders.shader_manage import *
 
 pygame.init()
 screen = pygame.display.set_mode((1200, 720), pygame.OPENGL | pygame.DOUBLEBUF)
-max_zoom = 1.1
-min_zoom = 0.1
+max_zoom = 3
+min_zoom = -1
 
 max_zoomz = 10
-min_zoomz = 5
+min_zoomz = 4
 
 
 pygame.display.set_caption('3D Visualizer')
