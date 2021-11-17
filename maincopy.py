@@ -4,8 +4,14 @@ import glm
 from math import sin
 from utilities.shaders import *
 from utilities.obj import *
+import pygame
 
-def prepare_data(shader,t_data,width, height):
+def prepare_data(shader):
+  glEnable(GL_TEXTURE_2D)
+  texture = pygame.image.load('utilities/texture/textureWolf.bmp')
+  t_data = pygame.image.tostring(texture, "RGB", 1)
+  width = texture.get_width()
+  height = texture.get_height()
   texture = glGenTextures(1)
   glBindTexture(GL_TEXTURE_2D, texture)
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, t_data)
@@ -21,11 +27,33 @@ def prepare_data(shader,t_data,width, height):
                 n.append((model.vertices[face[v][0]-1]))
                 t.append((model.tvertices[face[v][1]-1]))
 
+
+
+  '''ff = []
+
+  for f in model.faces:
+    for i in f:
+        print(i)
+        ff.append(i)'''
+
   #Vertices
   vertex_data = numpy.hstack([
     numpy.array(n, dtype=numpy.float32),
     numpy.array(t, dtype=numpy.float32)
   ])
+
+  '''vertex_data = numpy.array([
+    -0.5, -0.5, 0, 1.0,0,0,
+    0.5, -0.5, 0, 0,1.0,0,
+    0, 0.5,  0,0,0,1.0
+  ], dtype=numpy.float32)'''
+
+  '''#Faces
+  index_data = numpy.hstack([
+    numpy.array(ff, dtype=numpy.uint32)
+  ])
+
+  len_index = len(index_data)'''
 
   vertex_buffer_object = glGenBuffers(1)
   glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_object)
@@ -41,18 +69,24 @@ def prepare_data(shader,t_data,width, height):
     3, # size
     GL_FLOAT, # tipo
     GL_FALSE, # normalizados
-    4 * 5, # stride
+    4 * 6, # stride
     ctypes.c_void_p(0)
   )
   glEnableVertexAttribArray(0) #Habilitar memoria
 
+  #Necesita estar despues del primer vertex arrays
+  #Faces in index data load memory
+  '''element_buffer_object = glGenBuffers(1)
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer_object)
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, index_data.nbytes, index_data, GL_STATIC_DRAW)'''
+
   #Color
   glVertexAttribPointer(
     1, # location
-    2, # size
+    3, # size
     GL_FLOAT, # tipo
     GL_FALSE, # normalizados
-    4 * 5, # stride
+    4 * 6, # stride
     ctypes.c_void_p(4*3)
   )
   glEnableVertexAttribArray(1) #Habilitar
@@ -65,19 +99,17 @@ def prepare_data(shader,t_data,width, height):
 
 
 #Matrices
-def renderMatrix(a,a2,shader,pos_x,pos_y,pos_z):
+def renderMatrix(a,a2,shader):
   i = glm.mat4(1)
-  #MODELO
   translate = glm.translate(i, glm.vec3(0,0,0))
   scale = glm.scale(i, glm.vec3(0.02,0.02,0.02))
-  rotate = glm.rotate(i, 0, glm.vec3(0,1,0)) #rotate model , glm.radians(a)
-  #rotate = glm.rotate(i, sin(glm.radians(a*0.5)), glm.vec3(0,1,0)) #rotate model , glm.radians(a)
+  rotate = glm.rotate(i, sin(glm.radians(a*0.5)), glm.vec3(0,1,0)) #rotate model , glm.radians(a)
 
   model = translate * rotate * scale
 
   #Matriz de vista
   view = glm.lookAt(
-    glm.vec3(pos_x,pos_y,pos_z), # donde esta, parametros para alejarla
+    glm.vec3(0,0,5), # donde esta, parametros para alejarla
     glm.vec3(0,0,0), #donde ve
     glm.vec3(0,1,0) #up
   )
