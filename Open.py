@@ -6,6 +6,12 @@ from utilities.shaders.shader_manage import *
 
 pygame.init()
 screen = pygame.display.set_mode((1200, 720), pygame.OPENGL | pygame.DOUBLEBUF)
+max_zoom = 1.1
+min_zoom = 0.1
+
+max_zoomz = 10
+min_zoomz = 5
+
 
 pygame.display.set_caption('3D Visualizer')
 
@@ -80,14 +86,22 @@ while running:
         sound = pygame.mixer.Sound('utilities/sound/dance.mp3')
         sound.play()
       if event.key == pygame.K_w:
-          pos_y+=0.1
+          if(pos_y+0.1<=max_zoom and pos_y+0.1 >=min_zoom):
+              pos_y += 0.1
+
       if event.key == pygame.K_s:
-          pos_y-=0.1
+          if(pos_y-0.1<=max_zoom and pos_y-0.1 >=min_zoom):
+              pos_y -= 0.1
       if event.key == pygame.K_d:
-          pos_x+=0.1
+          if(pos_x+0.1<=max_zoom and pos_x+0.1 >=min_zoom):
+              pos_x += 0.1
+
       if event.key == pygame.K_a:
-          pos_x-=0.1
+          if(pos_x-0.1<=max_zoom and pos_x-0.1 >=min_zoom):
+              pos_x -= 0.1
       if event.key == pygame.K_e:
-          pos_z+=0.1
+          if(pos_z+0.1<=max_zoomz and pos_z+0.1 >=min_zoomz):
+              pos_z += 0.1
       if event.key == pygame.K_q:
-          pos_z-=0.1
+          if(pos_z-0.1<=max_zoomz and pos_z-0.1 >=min_zoomz):
+              pos_z -= 0.1
