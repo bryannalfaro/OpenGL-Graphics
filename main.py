@@ -6,6 +6,7 @@ from utilities.shaders import *
 from utilities.obj import *
 
 def prepare_data(shader,t_data,width, height):
+
   texture = glGenTextures(1)
   glBindTexture(GL_TEXTURE_2D, texture)
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, t_data)
@@ -14,17 +15,21 @@ def prepare_data(shader,t_data,width, height):
   model = Obj('utilities/model/wolf.obj')
 
 
-  n = []
-  t = []
+  vertices = []
+  texture = []
+  norm = []
   for face in (model.faces):
             for v in range(len(face)):
-                n.append((model.vertices[face[v][0]-1]))
-                t.append((model.tvertices[face[v][1]-1]))
+                vertices.append((model.vertices[face[v][0]-1]))
+                texture.append((model.tvertices[face[v][1]-1]))
+
+                norm.append((model.nvertices[face[v][2]-1]))
 
   #Vertices
   vertex_data = numpy.hstack([
-    numpy.array(n, dtype=numpy.float32),
-    numpy.array(t, dtype=numpy.float32)
+    numpy.array(vertices, dtype=numpy.float32),
+    numpy.array(texture, dtype=numpy.float32),
+    numpy.array(norm, dtype=numpy.float32)
   ])
 
   vertex_buffer_object = glGenBuffers(1)
@@ -41,21 +46,32 @@ def prepare_data(shader,t_data,width, height):
     3, # size
     GL_FLOAT, # tipo
     GL_FALSE, # normalizados
-    4 * 5, # stride
+    4 * 8, # stride
     ctypes.c_void_p(0)
   )
   glEnableVertexAttribArray(0) #Habilitar memoria
 
-  #Color
+  #Color texture
   glVertexAttribPointer(
     1, # location
     2, # size
     GL_FLOAT, # tipo
     GL_FALSE, # normalizados
-    4 * 5, # stride
+    4 * 8, # stride
     ctypes.c_void_p(4*3)
   )
   glEnableVertexAttribArray(1) #Habilitar
+
+  #Normales
+  glVertexAttribPointer(
+    2, # location
+    3, # size
+    GL_FLOAT, # tipo
+    GL_FALSE, # normalizados
+    4 * 8, # stride
+    ctypes.c_void_p(4*5)
+  )
+  glEnableVertexAttribArray(2) #Habilitar
 
   glUseProgram(shader) # usar shader
 
@@ -67,6 +83,7 @@ def prepare_data(shader,t_data,width, height):
 #Matrices
 def renderMatrix(a,a2,shader,pos_x,pos_y,pos_z):
   i = glm.mat4(1)
+  light = glm.vec3(-150,300,0)
   #MODELO
   translate = glm.translate(i, glm.vec3(0,0,0))
   scale = glm.scale(i, glm.vec3(0.02,0.02,0.02))
@@ -88,8 +105,9 @@ def renderMatrix(a,a2,shader,pos_x,pos_y,pos_z):
 
   #Viewport
   glViewport(0, 0, 1200, 720)
-
+  #color = glm.vec4(0.2,0.2,0.2,1)
   #Send matrix to shader
   #location, size, boolean, pointer
   glUniformMatrix4fv(glGetUniformLocation(shader, "theMatrix"), 1, GL_FALSE, glm.value_ptr(theMatrix))
+  glUniform3f(glGetUniformLocation(shader, "light"), light.x, light.y, light.z)
 
