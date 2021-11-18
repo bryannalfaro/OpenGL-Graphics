@@ -9,8 +9,7 @@ in float intensity_light;
 
 void main()
 {
-  vec2 posi = 4.*( posi.xy);
 
-	vec4 f_color = vec4( .5*sin(posi.x ) + .5, .5*sin(time+posi.y) + .5, sin(time), 1.0 );
+	vec4 f_color = vec4( 0.5*sin((4.0*( posi.xy)).x ) + 0.5, 0.5*sin(time+(4.0*( posi.xy)).y) + 0.5, sin(time), 1.0 );
   fragColor = intensity_light*2*texture(tex,mytexture)*f_color;
 }

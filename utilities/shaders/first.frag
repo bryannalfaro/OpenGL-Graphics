@@ -12,9 +12,9 @@ void main()
 {
   vec2 pos = posi.xy;
 
-	vec4 f_color = vec4( vec3( pos.y, (.5 - (pos.x ) / 2.), 1. - (pos.y) ), 1.0 );
-  vec4 n_color = vec4( vec3( (.5 - (pos.x ) / 2.),pos.y , 1. - (pos.y)),1.0);
-  vec4 p_color = vec4( vec3(1. - (pos.x), (.5 - (pos.y ) / 2.),pos.y ),1.0);
+	vec4 f_color = vec4( vec3( pos.y, (0.5 - (pos.x ) / 2.0), 1.0 - (pos.y) ), 1.0 );
+  vec4 n_color = vec4( vec3( (0.5 - (pos.x ) / 2.),pos.y , 1.0 - (pos.y)),1.0);
+  vec4 p_color = vec4( vec3(1.0 - (pos.x), (0.5 - (pos.y ) / 2.0),pos.y ),1.0);
 
 
   if(mod(time/3,2)==0){
