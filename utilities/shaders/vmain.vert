@@ -11,6 +11,7 @@ uniform vec3 light;
 
 out vec2 mytexture;
 out float intensity_light;
+out vec4 posi;
 
 void main()
 {
@@ -18,4 +19,5 @@ void main()
   gl_Position = theMatrix * vec4(position.x, position.y *flip, position.z, 1);
   intensity_light = intensity;
   mytexture = textureCoordinates;
+  posi = gl_Position;
 }

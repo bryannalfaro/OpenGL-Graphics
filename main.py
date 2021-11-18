@@ -87,7 +87,7 @@ def renderMatrix(a,a2,shader,pos_x,pos_y,pos_z):
   #MODELO
   translate = glm.translate(i, glm.vec3(0,0,0))
   scale = glm.scale(i, glm.vec3(0.02,0.02,0.02))
-  rotate = glm.rotate(i, 0, glm.vec3(0,1,0)) #rotate model , glm.radians(a)
+  rotate = glm.rotate(i, 0,glm.vec3(glm.radians(pos_x),glm.radians(pos_y),glm.radians(pos_z))) #rotate model , glm.radians(a)
   #rotate = glm.rotate(i, sin(glm.radians(a*0.5)), glm.vec3(0,1,0)) #rotate model , glm.radians(a)
 
   model = translate * rotate * scale
@@ -110,4 +110,5 @@ def renderMatrix(a,a2,shader,pos_x,pos_y,pos_z):
   #location, size, boolean, pointer
   glUniformMatrix4fv(glGetUniformLocation(shader, "theMatrix"), 1, GL_FALSE, glm.value_ptr(theMatrix))
   glUniform3f(glGetUniformLocation(shader, "light"), light.x, light.y, light.z)
+  glUniform1i(glGetUniformLocation(shader, "time"), a2)
 

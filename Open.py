@@ -83,7 +83,7 @@ while running:
       if event.key == pygame.K_p:
         sound.stop()
         shader = get_shader(shaders[3])
-        sound = pygame.mixer.Sound('utilities/sound/dance.mp3')
+        sound = pygame.mixer.Sound('utilities/sound/electronic.mp3')
         sound.play()
       if event.key == pygame.K_w:
           if(pos_y+0.1<=max_zoom and pos_y+0.1 >=min_zoom):
