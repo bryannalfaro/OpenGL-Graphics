@@ -12,15 +12,39 @@ https://user-images.githubusercontent.com/46506166/142458302-895cba41-6e2e-499f-
     20 puntos estética del modelo
     
  ## Controles:
- G: Wireframe 
- H: Fill model
+ G: Wireframe
+
+H: Fill model
+
+
  W: Up
+
+
  A: Left
+
+
  S: Down
+
+
  D: Right
+
+
  Q: Z back
+
+
  E: Z front
+
+
  J: Main shader
+
+
+
  K: First shader
+
+
  L: Second shader
+
+
  P: Third shader
+
+
