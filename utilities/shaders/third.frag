@@ -1,6 +1,7 @@
 #version 450
 layout(location = 0) out vec4 fragColor;
 //reference: https://learnopengl.com/Getting-started/Textures
+//reference: https://glslsandbox.com/
 in vec2 mytexture;
 uniform sampler2D tex;
 uniform int time;

@@ -27,7 +27,6 @@ t_data = pygame.image.tostring(texture, "RGB", 1)
 width = texture.get_width()
 height = texture.get_height()
 
-angle = 0
 angle2 = 0
 running = True
 
@@ -40,20 +39,14 @@ sound.play()
 while running:
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
-  angle +=5
   angle2 +=1
 
-  #len_d = prepare_data(shader)
   prepare_data(shader,t_data,width,height)
   #Enviar informacion al shader
   glUniform1f(glGetUniformLocation(shader, "flip"),makeflip)
-  renderMatrix(angle,angle2,shader,pos_x,pos_y,pos_z)
-
-  #Pintar luego de uniforms
-  #glDrawElements(GL_TRIANGLES, len_d, GL_UNSIGNED_INT, None) #glDrawArrays(GL_TRIANGLES, 0, 3) ahora no son arrays, son elementos
+  renderMatrix(angle2,shader,pos_x,pos_y,pos_z)
 
   pygame.display.flip()
-
 
   clock.tick(30) # perder tiempo
   for event in pygame.event.get():

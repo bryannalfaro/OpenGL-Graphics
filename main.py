@@ -1,7 +1,6 @@
 import numpy
 from OpenGL.GL import *
 import glm
-from math import sin
 from utilities.shaders import *
 from utilities.obj import *
 
@@ -14,7 +13,6 @@ def prepare_data(shader,t_data,width, height):
 
   model = Obj('utilities/model/wolf.obj')
 
-
   vertices = []
   texture = []
   norm = []
@@ -25,7 +23,7 @@ def prepare_data(shader,t_data,width, height):
 
                 norm.append((model.nvertices[face[v][2]-1]))
 
-  #Vertices
+  #data
   vertex_data = numpy.hstack([
     numpy.array(vertices, dtype=numpy.float32),
     numpy.array(texture, dtype=numpy.float32),
@@ -78,17 +76,14 @@ def prepare_data(shader,t_data,width, height):
   #Pintar luego de uniforms
   glDrawArrays(GL_TRIANGLES,0,len(vertex_data))
 
-
-
 #Matrices
-def renderMatrix(a,a2,shader,pos_x,pos_y,pos_z):
+def renderMatrix(a2,shader,pos_x,pos_y,pos_z):
   i = glm.mat4(1)
   light = glm.vec3(-150,300,0)
   #MODELO
   translate = glm.translate(i, glm.vec3(0,0,0))
   scale = glm.scale(i, glm.vec3(0.02,0.02,0.02))
-  rotate = glm.rotate(i, 0,glm.vec3(glm.radians(pos_x),glm.radians(pos_y),glm.radians(pos_z))) #rotate model , glm.radians(a)
-  #rotate = glm.rotate(i, sin(glm.radians(a*0.5)), glm.vec3(0,1,0)) #rotate model , glm.radians(a)
+  rotate = glm.rotate(i, 0,glm.vec3(glm.radians(pos_x),glm.radians(pos_y),glm.radians(pos_z))) #rotate model
 
   model = translate * rotate * scale
 
@@ -105,8 +100,8 @@ def renderMatrix(a,a2,shader,pos_x,pos_y,pos_z):
 
   #Viewport
   glViewport(0, 0, 1200, 720)
-  #color = glm.vec4(0.2,0.2,0.2,1)
-  #Send matrix to shader
+
+  #Send matrix, light and time to shader
   #location, size, boolean, pointer
   glUniformMatrix4fv(glGetUniformLocation(shader, "theMatrix"), 1, GL_FALSE, glm.value_ptr(theMatrix))
   glUniform3f(glGetUniformLocation(shader, "light"), light.x, light.y, light.z)
