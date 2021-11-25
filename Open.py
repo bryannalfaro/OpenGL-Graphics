@@ -26,7 +26,6 @@ c2 = 1
 glEnable(GL_DEPTH_TEST) #habilitar zbuffer
 glEnable(GL_TEXTURE_2D)
 clock = pygame.time.Clock()
-shaders = ["main","first","second","third"]
 
 texture = pygame.image.load('utilities/texture/textureWolf.bmp')
 t_data = pygame.image.tostring(texture, "RGB", 1)
@@ -36,7 +35,7 @@ height = texture.get_height()
 angle2 = 0
 running = True
 
-shader = get_shader(shaders[0])
+shader = get_shader(getArrShader(0))
 makeflip = 1
 pos_x,pos_y,pos_z = 0,0,5
 sound = pygame.mixer.Sound('utilities/sound/nature.mp3')
@@ -64,23 +63,23 @@ while running:
           glPolygonMode(GL_FRONT_AND_BACK, GL_FILL)
       if event.key == pygame.K_j:
           sound.stop()
-          shader = get_shader(shaders[0])
+          shader = get_shader(getArrShader(0))
           sound = pygame.mixer.Sound('utilities/sound/nature.mp3')
           sound.play()
 
       if event.key == pygame.K_k:
-          shader = get_shader(shaders[1])
+          shader = get_shader(getArrShader(1))
           sound.stop()
           sound = pygame.mixer.Sound('utilities/sound/chris.mp3')
           sound.play()
       if event.key == pygame.K_l:
           sound.stop()
-          shader = get_shader(shaders[2])
+          shader = get_shader(getArrShader(2))
           sound = pygame.mixer.Sound('utilities/sound/dance.mp3')
           sound.play()
       if event.key == pygame.K_p:
         sound.stop()
-        shader = get_shader(shaders[3])
+        shader = get_shader(getArrShader(3))
         sound = pygame.mixer.Sound('utilities/sound/electronic.mp3')
         sound.play()
       if event.key == pygame.K_w:

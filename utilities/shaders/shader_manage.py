@@ -13,3 +13,7 @@ def get_shader(shader):
 
   shader = compileProgram(cvs, cfs)
   return shader
+
+def getArrShader(position):
+  shaders = ["main","first","second","third"]
+  return shaders[position]
