@@ -4,6 +4,10 @@ import glm
 from utilities.shaders import *
 from utilities.obj import *
 
+#Referencias: Clase de Dennis
+#Bryann Alfaro
+#Proyecto opengl - Graficas por computadora
+
 def prepare_data(shader,t_data,width, height):
 
   texture = glGenTextures(1)

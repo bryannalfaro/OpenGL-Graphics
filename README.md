@@ -1,6 +1,6 @@
 # OpenGL-Graphics
 
-# See the video for change of shaders and audio
+# Activate the audio and see the video for change of shaders
 https://user-images.githubusercontent.com/46506166/142458302-895cba41-6e2e-499f-bedc-72cc21f9c184.mp4
 
 ## Puntos implementados:
@@ -10,7 +10,7 @@ https://user-images.githubusercontent.com/46506166/142458302-895cba41-6e2e-499f-
     10 puntos por utilizar normales
     20 puntos por implementar una cámara
     20 puntos estética del modelo
-    
+
  ## Controles:
  G: Wireframe
 

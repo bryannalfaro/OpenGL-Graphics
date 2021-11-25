@@ -3,6 +3,11 @@ from OpenGL.GL import *
 from math import sin
 from main import *
 from utilities.shaders.shader_manage import *
+import random
+
+#Referencias: Clase de Dennis
+#Bryann Alfaro
+#Proyecto opengl - Graficas por computadora
 
 pygame.init()
 screen = pygame.display.set_mode((1200, 720), pygame.OPENGL | pygame.DOUBLEBUF)
@@ -15,8 +20,9 @@ min_zoomz = 4
 
 pygame.display.set_caption('3D Visualizer')
 
+c1 = 1
+c2 = 1
 
-glClearColor(1, 1, 1, 1.0)
 glEnable(GL_DEPTH_TEST) #habilitar zbuffer
 glEnable(GL_TEXTURE_2D)
 clock = pygame.time.Clock()
@@ -30,15 +36,14 @@ height = texture.get_height()
 angle2 = 0
 running = True
 
-
 shader = get_shader(shaders[0])
 makeflip = 1
 pos_x,pos_y,pos_z = 0,0,5
 sound = pygame.mixer.Sound('utilities/sound/nature.mp3')
 sound.play()
 while running:
+  glClearColor(1, 1,1, 1.0)
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-
   angle2 +=1
 
   prepare_data(shader,t_data,width,height)
