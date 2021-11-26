@@ -83,7 +83,7 @@ def prepare_data(shader,t_data,width, height):
 #Matrices
 def renderMatrix(a2,shader,pos_x,pos_y,pos_z):
   i = glm.mat4(1)
-  light = glm.vec3(-150,300,0)
+  light = glm.vec3(-160,280,4)
   #MODELO
   translate = glm.translate(i, glm.vec3(0,0,0))
   scale = glm.scale(i, glm.vec3(0.02,0.02,0.02))
