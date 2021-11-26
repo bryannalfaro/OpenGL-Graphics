@@ -36,7 +36,6 @@ angle2 = 0
 running = True
 
 shader = get_shader(getArrShader(0))
-makeflip = 1
 pos_x,pos_y,pos_z = 0,0,5
 sound = pygame.mixer.Sound('utilities/sound/nature.mp3')
 sound.play()
@@ -46,8 +45,6 @@ while running:
   angle2 +=1
 
   prepare_data(shader,t_data,width,height)
-  #Enviar informacion al shader
-  glUniform1f(glGetUniformLocation(shader, "flip"),makeflip)
   renderMatrix(angle2,shader,pos_x,pos_y,pos_z)
 
   pygame.display.flip()
